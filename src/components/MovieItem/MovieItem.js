@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux'
 import './MovieItem.css'
 
 class MovieItem extends Component{
 
     handleItemCardSelect = () => {
-        console.log(this.props);
-        
+        console.log(this.props)
     }
     render() {
 
@@ -23,5 +24,4 @@ class MovieItem extends Component{
     }
 }
 
-
-export default MovieItem;
+export default withRouter(connect()(MovieItem));
