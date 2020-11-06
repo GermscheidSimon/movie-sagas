@@ -1,0 +1,6 @@
+.movieListWrap{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 8%;
+    padding-right: 8%;
+}

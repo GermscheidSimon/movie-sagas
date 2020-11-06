@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import MovieItem from '../MovieItem/MovieItem'
 
+import './MovieList.css'
+
 class MovieList extends Component {
 
 
@@ -18,6 +20,7 @@ class MovieList extends Component {
 
 
     render(){
+        
         return(
             <div className="movieListWrap">
                 {this.props.reduxState.movies.map( movieRecord => {
