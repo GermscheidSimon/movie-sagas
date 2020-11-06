@@ -21,6 +21,10 @@ img{
 .description{
     text-align: left;
     text-indent: 2em;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.endDescText{
+    color: blue;
+    text-decoration: underline;
 }
