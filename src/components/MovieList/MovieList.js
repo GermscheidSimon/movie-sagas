@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import MovieItem from '../MovieItem/MovieItem'
 
 class MovieList extends Component {
 
@@ -13,15 +14,15 @@ class MovieList extends Component {
             type: "FETCH_MOVIE_LIST"
         })
     }
-    // {this.props.reduxState.movies.maps( movieObj => {
-    //     return <p>{JSON.stringify(movieObj)}</p>
-    // })}
+            
 
 
     render(){
         return(
             <div className="movieListWrap">
-                {JSON.stringify(this.props)}
+                {this.props.reduxState.movies.map( movieRecord => {
+                    return <MovieItem key={movieRecord.id} movieRecord={movieRecord}/>
+                })}
             </div>
         )
     }
