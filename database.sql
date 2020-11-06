@@ -25,7 +25,7 @@ CREATE TABLE "movie_Junction"(
 INSERT INTO ("movies_id", "genres_id")
 VALUES
 (1, 1),
-(1, 2)
+(1, 2);
 
 --------[ DATA! ]---------
 
