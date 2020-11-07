@@ -12,9 +12,12 @@ import createSagaMiddleware from 'redux-saga';
 import {put, takeEvery} from 'redux-saga/effects'
 import Axios from 'axios';
 
+import {router_PushToHistory} from './library/navigation'
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery("FETCH_MOVIE_LIST", fetchMoviesList)
+    yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails)
 }
 function* fetchMoviesList() {
     try {
@@ -23,6 +26,25 @@ function* fetchMoviesList() {
             type: "SET_MOVIES",
             payload: movieList.data
         })
+    } catch (error) {
+        console.log(error);
+    }
+}
+function* fetchMovieDetails(action) {
+    let movieId = action.payload.movieRecord.id
+    try {
+        // movie details will contain the data that the details page will use to display things. 
+        const movieDetails = {
+            genres: yield Axios.get(`/api/movie/${movieId}`),
+            details: action.payload.movieRecord
+        }
+        // add the movie details (full data) to redux state
+        yield put({
+            type: "SET_DETAILS",
+            payload: movieDetails
+        })
+        // if this all succeeded, push to the details page. 
+        router_PushToHistory('/details', action.payload.srcComp)
     } catch (error) {
         console.log(error);
     }

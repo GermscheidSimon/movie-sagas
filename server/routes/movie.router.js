@@ -12,8 +12,22 @@ router.get('/', (req, res) => {
   }).catch( (error) => {
     console.log(error);
     res.sendStatus(500)
-  })
-})
+  });
+});
+
+router.get('/:id', (req, res) => {
+  console.log('/api/movies/:id');
+  const getMovieGenreByID = `SELECT * FROM "movie_Junction"
+                              JOIN "genres" on "genres"."id" = "movie_Junction"."genres_id"
+                              WHERE "movies_id" = $1;`
+
+  pool.query(getMovieGenreByID, [req.params.id]).then( (response) => {
+    console.log(response.row);
+    res.send(response.rows);
+  }).catch( (error) => {
+    console.log(error);
+  });
+});
 
 router.post('/', (req, res) => {
   console.log(req.body);
