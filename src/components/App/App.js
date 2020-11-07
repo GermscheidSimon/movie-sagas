@@ -4,6 +4,7 @@ import {HashRouter as Router, Route} from 'react-router-dom';
 //Components
 import MovieList from '../MovieList/MovieList'
 import MovieDetails from '../MovieDetails/MovieDetails'
+import Header from '../Header/Header'
 //misc
 import './App.css';
 
@@ -13,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Movies!</h1>
+        <Header/>
         <Router>
          
         

@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {router_PushToHistory} from '../../library/navigation'
 
 import './MovieDetails.css'
 
-class MovieDetails extends Component{
-
-
-    /**
-
+/**
     movieDetails reducer JSON structure~~~~
 
     const detailState = { 
@@ -30,6 +27,12 @@ class MovieDetails extends Component{
     }
      */
 
+class MovieDetails extends Component{
+
+    handleClick = () => {
+        router_PushToHistory('/', this)
+    }
+
 
     render(){
 
@@ -38,12 +41,17 @@ class MovieDetails extends Component{
 
         return(
             <div className="movieDetailsWrap">
-                <p className="movieTitle">{movieDetails.details.title}</p>
-                <ul>
-                    {movieDetails.genres.data.map(genre => {
-                        return <li>{genre.name}</li>
-                    })}
-                </ul>
+                <div className="detailTopOfPage">
+                    <div className="titleWrap">
+                        <p className="movieTitle">{movieDetails.details.title}</p>
+                        <ul>
+                            {movieDetails.genres.data.map(genre => {
+                                return <li>{genre.name}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <button onClick={this.handleClick}> Return To Movie List...</button>
+                </div>
                 <img className="moviePoster" src={movieDetails.details.poster} alt={movieDetails.details.title}/>
                 <p>{movieDetails.details.description}</p>
                 
