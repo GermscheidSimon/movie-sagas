@@ -74,12 +74,31 @@ const genres = (state = [], action) => {
     }
 }
 
-const details = (state = {}, action) => {
+const detailState = { // detail state represents the JSON structure of the movie details reducer. The detail page is looking for this data when it is called. 
+    details: {
+        id: 0,
+        title: 'Movie Title',
+        description: 'description',
+        poster: 'image path'
+        },
+    genres: {
+        data: [
+            {
+                id: 0,
+                movies_id: 0,
+                genres_id: 0,
+                name: 'genre name'
+            }
+        ]
+        }
+}
+
+const movieDetails = (state = detailState, action) => {
     switch (action.type) {
         case "SET_DETAILS":
             return action.payload;
         default:
-            return state;
+            return detailState;
     }
 }
 
@@ -88,7 +107,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        details,
+        movieDetails,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
