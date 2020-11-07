@@ -16,8 +16,6 @@ class MovieList extends Component {
             type: "FETCH_MOVIE_LIST"
         })
     }
-            
-
 
     render(){
         

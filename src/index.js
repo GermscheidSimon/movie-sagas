@@ -12,9 +12,12 @@ import createSagaMiddleware from 'redux-saga';
 import {put, takeEvery} from 'redux-saga/effects'
 import Axios from 'axios';
 
+import {router_PushToHistory} from './library/navigation'
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery("FETCH_MOVIE_LIST", fetchMoviesList)
+    yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails)
 }
 function* fetchMoviesList() {
     try {
@@ -23,6 +26,25 @@ function* fetchMoviesList() {
             type: "SET_MOVIES",
             payload: movieList.data
         })
+    } catch (error) {
+        console.log(error);
+    }
+}
+function* fetchMovieDetails(action) {
+    let movieId = action.payload.movieRecord.id
+    try {
+        // movie details will contain the data that the details page will use to display things. 
+        const movieDetails = {
+            genres: yield Axios.get(`/api/movie/${movieId}`),
+            details: action.payload.movieRecord
+        }
+        // add the movie details (full data) to redux state
+        yield put({
+            type: "SET_DETAILS",
+            payload: movieDetails
+        })
+        // if this all succeeded, push to the details page. 
+        router_PushToHistory('/details', action.payload.srcComp)
     } catch (error) {
         console.log(error);
     }
@@ -52,7 +74,26 @@ const genres = (state = [], action) => {
     }
 }
 
-const details = (state = {}, action) => {
+const detailState = { // detail state represents the JSON structure of the movie details reducer. The detail page is looking for this data when it is called. 
+    details: {
+        id: 0,
+        title: 'Movie Title',
+        description: 'description',
+        poster: 'image path'
+        },
+    genres: {
+        data: [
+            {
+                id: 0,
+                movies_id: 0,
+                genres_id: 0,
+                name: 'genre name'
+            }
+        ]
+        }
+}
+
+const movieDetails = (state = detailState, action) => {
     switch (action.type) {
         case "SET_DETAILS":
             return action.payload;
@@ -66,7 +107,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        details,
+        movieDetails,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
