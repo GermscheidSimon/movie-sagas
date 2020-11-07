@@ -98,7 +98,7 @@ const movieDetails = (state = detailState, action) => {
         case "SET_DETAILS":
             return action.payload;
         default:
-            return detailState;
+            return state;
     }
 }
 

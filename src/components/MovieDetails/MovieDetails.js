@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
+import './MovieDetails.css'
+
 class MovieDetails extends Component{
 
 
@@ -35,15 +37,16 @@ class MovieDetails extends Component{
 
 
         return(
-            <div>
-                <p>{movieDetails.details.title}</p>
-                <img src={movieDetails.details.poster} alt={movieDetails.details.title}/>
-                <p>{movieDetails.details.description}</p>
+            <div className="movieDetailsWrap">
+                <p className="movieTitle">{movieDetails.details.title}</p>
                 <ul>
                     {movieDetails.genres.data.map(genre => {
                         return <li>{genre.name}</li>
                     })}
                 </ul>
+                <img className="moviePoster" src={movieDetails.details.poster} alt={movieDetails.details.title}/>
+                <p>{movieDetails.details.description}</p>
+                
                 
             </div>
         )

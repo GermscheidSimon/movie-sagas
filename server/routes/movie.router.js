@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
   });
 });
 
+//after drafting this, it seems kinda clunky to just go and get genres for the given move to display on the details page. 
 router.get('/:id', (req, res) => {
   console.log('/api/movies/:id');
   const getMovieGenreByID = `SELECT * FROM "movie_Junction"

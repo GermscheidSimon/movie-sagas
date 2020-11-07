@@ -22,12 +22,41 @@ CREATE TABLE "movie_Junction"(
   "genres_id" INT REFERENCES "genres"
 )
 
-INSERT INTO ("movies_id", "genres_id")
-VALUES
-(1, 1),
-(1, 2);
+
 
 --------[ DATA! ]---------
+INSERT INTO "movie_Junction"("movies_id", "genres_id")
+VALUES
+(1, 1),
+(1, 2),
+(2, 8),
+(2, 9),
+(2, 10),
+(3, 13),
+(3,8),
+(4, 1),,
+(4, 2),
+(5, 6),
+(6, 7),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 2),
+(9,4),
+(9,8),
+(8,3),
+(10,11),
+(10,1),
+(11,11),
+(11,1),
+(12,6),
+(12,3),
+(13,6),
+(13,10),
+(14,1),
+(14,2),
+
+
 
 -- starter movies
 INSERT INTO "movies" ("title", "poster", "description")
