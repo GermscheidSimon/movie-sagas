@@ -2,7 +2,7 @@
     margin: 4%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 300px;
-    max-height: 500px;
+    max-height: 600px;
 }
 
 .movieItemWrap:hover{
@@ -12,7 +12,7 @@
 }
 img{
     width: 100%;
-    height: 60%;
+    height: 65%;
 }
 .title{
     font-weight: bolder;

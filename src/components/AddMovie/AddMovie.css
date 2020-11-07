@@ -1,0 +1,10 @@
+.addMovieWrap{
+    margin: 4%;
+}
+.addMovieHeader{
+    font-size: 20px;
+}
+.formWrap{
+    display: flex;
+    flex-direction: column;
+}

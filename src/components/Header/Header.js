@@ -13,7 +13,7 @@ class Header extends Component {
                 </div>
                 <div className="navBar">
                     <Link to="/" className="linkButton" >Movie List</Link>
-                    <Link to="/details"className="linkButton"  >Add a movie</Link>
+                    <Link to="/addMovie" className="linkButton"  >Add a movie</Link>
                 </div>
             </div>
         )

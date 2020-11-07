@@ -7,6 +7,7 @@ import MovieDetails from '../MovieDetails/MovieDetails'
 import Header from '../Header/Header'
 //misc
 import './App.css';
+import AddMovie from '../AddMovie/AddMovie';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
         
           <Route exact path="/" component={MovieList}/>
           <Route path="/details" component={MovieDetails}/>
+          <Route path="/addMovie" component={AddMovie}/>
         </Router>
       </div>
     );
