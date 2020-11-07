@@ -53,7 +53,7 @@ class MovieDetails extends Component{
                     <button onClick={this.handleClick}> Return To Movie List...</button>
                 </div>
                 <img className="moviePoster" src={movieDetails.details.poster} alt={movieDetails.details.title}/>
-                <p>{movieDetails.details.description}</p>
+                <p className="description">{movieDetails.details.description}</p>
                 
                 
             </div>
