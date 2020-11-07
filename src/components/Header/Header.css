@@ -1,0 +1,31 @@
+.navBar{
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 50%;
+}
+.titleWrap{
+   text-align: left;
+   padding-left: 5%;
+   vertical-align: top;
+   padding-right: 10%;
+
+}
+.headerWrap{
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.2);
+    box-shadow: -2px 0px 10px 0px rgba(0,0,0,0.2);
+    align-content: center;
+    display: flex;
+    width: 100%;
+    
+}
+.linkButton{
+    text-align: center;
+    padding: 3%;
+    text-decoration: none;
+    color: black;
+}
+.linkButton:hover{
+    background-color: lightgrey;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    border-radius: 4%;
+}
