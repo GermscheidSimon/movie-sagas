@@ -1,7 +1,27 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import './AddMovie.css'
 
 class AddMovie extends Component{
+
+    componentDidMount = () => {
+        this.fetchGenres();
+    }
+
+    state = {
+        newMovie: {
+            title: '',
+            poster: '',
+            description: '',
+            genre_id: ''
+        } 
+    }
+
+    fetchGenres = () => {
+        this.props.dispatch({
+            type: "FETCH_GENRES"
+        });
+    }
 
 
     render() {
@@ -24,16 +44,17 @@ class AddMovie extends Component{
                     <div>
                         <label  htmlFor="movieGenreSelect">Movie Genre: </label>
                         <select className="movieGenreSelect">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                            {this.props.reduxState.genres.map( genre => {
+                                 return <option value={genre.id}>{genre.name}</option>
+                            })}
                         </select>
                     </div>
+                    <button>Add Movie</button>
                 </div>
             </div>
         )
     }
 }
 
-export default AddMovie;
+const putReduxStateOnProps = (reduxState) => ({reduxState})
+export default connect(putReduxStateOnProps)(AddMovie);

@@ -18,6 +18,7 @@ import {router_PushToHistory} from './library/navigation'
 function* rootSaga() {
     yield takeEvery("FETCH_MOVIE_LIST", fetchMoviesList)
     yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails)
+    yield takeEvery("FETCH_GENRES", fetchGenres)
 }
 function* fetchMoviesList() {
     try {
@@ -49,6 +50,17 @@ function* fetchMovieDetails(action) {
         console.log(error);
     }
 }
+function* fetchGenres() {
+    try {
+        const genresList = yield Axios.get('/api/genre')
+        yield put({
+            type: "SET_GENRES",
+            payload: genresList.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -74,8 +86,8 @@ const genres = (state = [], action) => {
     }
 }
 
-const detailState = { // detail state represents the JSON structure of the movie details reducer. The detail page is looking for this data when it is called. 
-    details: {
+const detailState = { // detail state represents the JSON structure of the movie details reducer.
+    details: {        // The detail page is looking for this data when it is called. 
         id: 0,
         title: 'Movie Title',
         description: 'description',
