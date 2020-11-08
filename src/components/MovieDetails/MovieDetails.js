@@ -16,8 +16,8 @@ class MovieDetails extends Component{
         this.getMovieDetials()
     }
 
-    handleClick = () => {
-        router_PushToHistory('/', this)
+    handleClick = (destination) => {
+        router_PushToHistory(destination, this)
     }
     getMovieDetials = () => {    
         this.props.dispatch({
@@ -25,6 +25,7 @@ class MovieDetails extends Component{
             payload: this.props.match.params
         })
     }
+
 
 
     render(){
@@ -43,7 +44,9 @@ class MovieDetails extends Component{
                             })}
                         </ul>
                     </div>
-                    <button className="defaultBtnCss" onClick={this.handleClick}> Return To Movie List...</button>
+                    <button className="defaultBtnCss" onClick={() => this.handleClick('/')}> Return To Movie List...</button>
+                    <button className="defaultBtnCss" onClick={() => this.handleClick(`/edit/${movieDetailsData.movieDetails.id}`)}> Edit Movie </button>
+
                 </div>
                 <img className="moviePoster" src={movieDetailsData.movieDetails.poster} alt={movieDetailsData.movieDetails.title}/> 
                 <p className="description">{movieDetailsData.movieDetails.description}</p>

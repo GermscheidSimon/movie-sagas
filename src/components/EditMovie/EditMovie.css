@@ -1,0 +1,30 @@
+.addMovieWrap{
+    margin-top: 7%;
+    margin-left: 20%;
+    margin-right: 40%;
+    box-shadow: -20px 0px 16px 0px rgba(0,0,0,0.2);
+    text-align: left;
+    min-height: 400px;
+}
+.addMovieHeader{
+    font-size: 20px;
+    padding: 5%;
+}
+.formWrap{
+    padding-left: 5%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.formInputWrap{
+    margin-bottom: 10%;
+    margin-left: 3%;
+}
+
+.formInput{
+    height: 100%;
+    float: right;
+}
+.cancel{
+    background-color:lightcoral;
+}
