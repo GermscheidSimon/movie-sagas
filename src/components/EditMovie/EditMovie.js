@@ -3,41 +3,47 @@ import {connect} from 'react-redux'
 import './EditMovie.css'
 import {router_PushToHistory} from '../../library/navigation'
 
-class AddMovie extends Component{
 
+// when 'edit movie' is selected from the details page it works just fine, but if the page is refreshed
+// it doesn't work. I don't understand why.
+// in an attempt to get the page to pull in data after refresshing....
+// I tried creating a generator function to procedurally add data to the state.
+function* fetchMovieData(src) {
+    yield src.props.dispatch({
+        type: "FETCH_MOVIE_DETAILS",
+        payload: src.props.match.params
+    })
+    let movieData = src.props.reduxState.movieDetails.movieDetails
+    yield src.setState({
+        newMovie: {
+            title: movieData.title,
+            poster: movieData.poster,
+            description: movieData.description,
+            id: movieData.id
+        }
+    })
+}
+
+
+
+class AddMovie extends Component{
+    
     state = {
         newMovie: {
-            title: 'test',
-            poster: 'test',
-            description: 'test',
-            genres: [{
-                id: 0,
-                genres_id: '',
-                name: ''
-            }]
-        }
+            title: 'Movie Title',
+            poster: 'poster path',
+            description: 'descirption',
+            id: 0
+        }, 
+        datafetch: fetchMovieData(this) // this somehow works but not on page refresh
     }
     componentDidMount = () => {
         this.fetchGenres();
-        this.fetchMovieData();
+        this.state.datafetch.next()
+        this.state.datafetch.next()
     }
 
-    fetchMovieData = () => {
-        this.props.dispatch({
-            type: "FETCH_MOVIE_DETAILS",
-            payload: this.props.match.params
-        })
-        let movieData = this.props.reduxState.movieDetails.movieDetails
-        let genreData = this.props.reduxState.movieDetails.movieGenres
-        this.setState({
-            newMovie: {
-                title: movieData.title,
-                poster: movieData.poster,
-                description: movieData.description,
-                genres: genreData
-            }
-        })
-    }
+   
 
     fetchGenres = () => {
         this.props.dispatch({
@@ -53,22 +59,20 @@ class AddMovie extends Component{
         });
         console.log(this.state.newMovie);
     }
-    // handleSubmit = () => {
-    //     let newMovieSubmission = {
-    //         data: this.state.newMovie,
-    //         nav: this
-    //     }
-    //     this.props.dispatch({
-    //         type: "POST_NEW_MOVIE",
-    //         payload: newMovieSubmission
-    //     })
-
-    // }
+    handleSubmit = () => {
+       console.log(this.state);
+    }
     redirectToHome = () => {
         router_PushToHistory('/', this)
     }
     submit = () => {
-        console.log(this.state);
+        this.props.dispatch({
+            type: 'UPDATE_MOVIE',
+            payload: {
+                data: this.state.newMovie,
+                nav: this
+            }
+        })
         
     }
 
@@ -107,27 +111,12 @@ class AddMovie extends Component{
                                 value={this.state.newMovie.description}
                             />
                     </div>
-                    <div className="formInputWrap">
-                        <label  htmlFor="movieGenreSelect">Movie Genre: </label>
-                        <select 
-                            className="formInput movieGenreSelect"
-                            required
-                            onChange={(event) => this.handleChange('genre_id', event)}
-                        >
-                            <option key="0" value={this.state.newMovie.genre_id}>{this.state.newMovie.id}</option> 
-                            {this.props.reduxState.genres.map( genre => {
-                                
-                                // return an option for each genre pulled from sql
-                                return <option key={genre.id} value={genre.id}>{genre.name}</option>
-                            })}
-                        </select>
-                    </div>
+                    
                     <div className="formInputWrap">
                         <input className="formInput defaultBtnCss" type="submit" value="Save"/>
                         <button  className="defaultBtnCss cancel" onClick={this.redirectToHome}>Cancel</button>
                     </div>
                 </form>
-                <button onClick={this.submit}>test</button>
             </div>
         )
     }

@@ -20,6 +20,7 @@ function* rootSaga() {
     yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails)
     yield takeEvery("FETCH_GENRES", fetchGenres)
     yield takeEvery("POST_NEW_MOVIE", postNewMovie)
+    yield takeEvery("UPDATE_MOVIE", updateMovie)
 }
 function* fetchMoviesList() {
     try {
@@ -66,6 +67,15 @@ function* postNewMovie(action) {
         yield router_PushToHistory('/', action.payload.nav) // upon successful post, return user to movie list
     } catch (error) {
         alert('Failed to add movie. Please try again. ') // let the user know if submission failed
+    }
+}
+function* updateMovie(action) {
+    try {
+       yield Axios.put('/api/movie', action.payload.data)
+       router_PushToHistory('/', action.payload.nav) 
+    } catch (error) {
+        console.log(error);
+        alert('failed to edit new movie. Please try again')
     }
 }
 

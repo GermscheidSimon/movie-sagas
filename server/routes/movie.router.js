@@ -46,6 +46,29 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.put('/', (req, res)  => {
+  const updateMovieData =`
+  UPDATE "movies" 
+  SET "title" = $1, "poster" = $2, "description" = $3
+  wHERE "id" = $4;
+  `
+  let queryData = [
+    req.body.title,
+    req.body.poster,
+    req.body.description,
+    req.body.id
+  ]
+  pool.query(updateMovieData, queryData).then((response) => {
+    console.log(response);
+    res.sendStatus(200)
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+})
+
+
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
