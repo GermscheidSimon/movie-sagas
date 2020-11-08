@@ -78,7 +78,7 @@ As one of your last projects, it's possible you will be sharing this with employ
     - [x] Research cards for your movie posters on the list page
     - [x] Research grids for your movie posters on the Movie List page
 - [ ] Commit your code frequently! You should have at 15+ commits on a project of this size. Use branches to help break down your features.
-- [ ] Comment your code.
+- [x] Comment your code.
 - [ ] Update this README to include a description of the project in your own words.
 
 ## Stretch Goals
