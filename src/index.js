@@ -16,11 +16,11 @@ import {router_PushToHistory} from './library/navigation'
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery("FETCH_MOVIE_LIST", fetchMoviesList)
-    yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails)
-    yield takeEvery("FETCH_GENRES", fetchGenres)
-    yield takeEvery("POST_NEW_MOVIE", postNewMovie)
-    yield takeEvery("UPDATE_MOVIE", updateMovie)
+    yield takeEvery("FETCH_MOVIE_LIST", fetchMoviesList)  //get movie sql table
+    yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails) // get movie details for a given movie
+    yield takeEvery("FETCH_GENRES", fetchGenres)  // get genre sql table
+    yield takeEvery("POST_NEW_MOVIE", postNewMovie) // movie router - POST request for new movie
+    yield takeEvery("UPDATE_MOVIE", updateMovie)  // movie router - PU request to edit move
 }
 function* fetchMoviesList() {
     try {
