@@ -4,7 +4,7 @@
     margin-right: 40%;
     box-shadow: -20px 0px 16px 0px rgba(0,0,0,0.2);
     text-align: left;
-    min-height: 500px;
+    min-height: 400px;
 }
 .addMovieHeader{
     font-size: 20px;
@@ -15,7 +15,13 @@
     padding-bottom: 2%;
     display: flex;
     flex-direction: column;
-    
+}
+.formInputWrap{
+    margin-bottom: 10%;
+    margin-left: 3%;
 }
 
-
+.formInput{
+    height: 100%;
+    float: right;
+}

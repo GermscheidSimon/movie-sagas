@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
 //after drafting this, it seems kinda clunky to just go and get genres for the given move to display on the details page. 
 router.get('/:id', (req, res) => {
   console.log('/api/movies/:id');
-  const getMovieGenreByID = `SELECT * FROM "movie_Junction"
-                              JOIN "genres" on "genres"."id" = "movie_Junction"."genres_id"
+  const getMovieGenreByID = `SELECT * FROM "movies_genres"
+                              JOIN "genres" on "genres"."id" = "movies_genres"."genres_id"
                               WHERE "movies_id" = $1;`
 
   pool.query(getMovieGenreByID, [req.params.id]).then( (response) => {

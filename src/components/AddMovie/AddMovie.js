@@ -4,17 +4,16 @@ import './AddMovie.css'
 
 class AddMovie extends Component{
 
-    componentDidMount = () => {
-        this.fetchGenres();
-    }
-
     state = {
         newMovie: {
             title: '',
             poster: '',
             description: '',
-            genre_id: ''
+            genre_id: 0
         } 
+    }
+    componentDidMount = () => {
+        this.fetchGenres();
     }
 
     fetchGenres = () => {
@@ -22,35 +21,70 @@ class AddMovie extends Component{
             type: "FETCH_GENRES"
         });
     }
+    handleChange = (keyname, event) => {        
+        this.setState({
+            newMovie:{
+                ...this.state.newMovie,
+                [keyname]: event.target.value
+            }
+        });
+        console.log(this.state.newMovie);
+    }
+    handleSubmit = () => {
+        this.props.dispatch({
+            type: "POST_NEW_MOVIE",
+            payload: this.state.newMovie
+        })
+    }
 
 
     render() {
         return(
             <div className="addMovieWrap">
                 <div className="addMovieHeader">Add a movie</div>
-                <div className="formWrap">
-                    <div>
+                <form className="formWrap" onSubmit={this.handleSubmit}>
+                    <div className="formInputWrap">
                         <label htmlFor="movieTitleInp">Movie Title:  </label>
-                            <input className="movieTitleInp" placeholder="'Lord of the Rings...'"/>
+                            <input 
+                                className="formInput movieTitleInp"
+                                required
+                                onChange={(event) => this.handleChange('title', event)} 
+                                placeholder="'Lord of the Rings...'"
+                            />
                     </div>
-                    <div>
+                    <div className="formInputWrap">
                         <label htmlFor="moviePosterInp">Movie Poster Link:  </label>
-                            <input className="moviePosterInp" placeholder="http:// . . ."/>
+                            <input 
+                                className="formInput moviePosterInp"
+                                required
+                                onChange={(event) => this.handleChange('poster', event)} 
+                                placeholder="http:// . . ."
+                            />
                     </div>
-                    <div>
+                    <div className="formInputWrap"> 
                         <label htmlFor="movieDescriptionInp">Movie Poster Link:  </label>
-                            <textarea className="movieDescriptionInp" placeholder="an epic fantasy film . . . "/>
+                            <textarea 
+                                className="formInput movieDescriptionInp"
+                                required
+                                onChange={(event) => this.handleChange('description', event)} 
+                                placeholder="an epic fantasy film . . . "
+                            />
                     </div>
-                    <div>
+                    <div className="formInputWrap">
                         <label  htmlFor="movieGenreSelect">Movie Genre: </label>
-                        <select className="movieGenreSelect">
+                        <select 
+                            className="formInput movieGenreSelect"
+                            required
+                            onChange={(event) => this.handleChange('genre_id', event)}
+                        >
+                            <option value="">Select a genre</option>
                             {this.props.reduxState.genres.map( genre => {
                                  return <option value={genre.id}>{genre.name}</option>
                             })}
                         </select>
                     </div>
-                    <button>Add Movie</button>
-                </div>
+                    <input className="formInput" type="submit" value="Add Movie"/>
+                </form>
             </div>
         )
     }
