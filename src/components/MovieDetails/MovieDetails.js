@@ -7,53 +7,46 @@ import './MovieDetails.css'
 /**
     movieDetails reducer JSON structure~~~~
 
-    const detailState = { 
-    details: {  this data comes from the movie list page when it is clicked. 
-        id: 0,
-        title: 'Movie Title',
-        description: 'description',
-        poster: 'image path'
-        },
-    genres: {          genre's data comes from the GET /api/movie/:id route that pulls in genre data for the given movie ID. 
-        data: [
-            {
-                id: 0,
-                movies_id: 0,
-                genres_id: 0,
-                name: 'genre name'
-            }
-        ]
-        }
-    }
+   
      */
 
 class MovieDetails extends Component{
 
+    componentDidMount = () => {
+        this.getMovieDetials()
+    }
+
     handleClick = () => {
         router_PushToHistory('/', this)
+    }
+    getMovieDetials = () => {    
+        this.props.dispatch({
+            type: "FETCH_MOVIE_DETAILS",
+            payload: this.props.match.params
+        })
     }
 
 
     render(){
 
-        const movieDetails = this.props.reduxState.movieDetails
+        const movieDetailsData = this.props.reduxState.movieDetails
 
 
         return(
             <div className="movieDetailsWrap">
                 <div className="detailTopOfPage">
                     <div className="titleWrap">
-                        <p className="movieTitle">{movieDetails.details.title}</p>
+                        <p className="movieTitle">{movieDetailsData.movieDetails.title}</p>
                         <ul>
-                            {movieDetails.genres.data.map(genre => {
+                            {movieDetailsData.movieGenres.map(genre => {
                                 return <li>{genre.name}</li>
                             })}
                         </ul>
                     </div>
                     <button className="defaultBtnCss" onClick={this.handleClick}> Return To Movie List...</button>
                 </div>
-                <img className="moviePoster" src={movieDetails.details.poster} alt={movieDetails.details.title}/>
-                <p className="description">{movieDetails.details.description}</p>
+                <img className="moviePoster" src={movieDetailsData.movieDetails.poster} alt={movieDetailsData.movieDetails.title}/> 
+                <p className="description">{movieDetailsData.movieDetails.description}</p>
                 
                 
             </div>

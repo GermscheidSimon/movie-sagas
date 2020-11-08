@@ -19,7 +19,7 @@ class App extends Component {
         <Header/>
          
           <Route exact path="/" component={MovieList}/>
-          <Route path="/details" component={MovieDetails}/>
+          <Route path="/details/:id" component={MovieDetails}/>
           <Route path="/addMovie" component={AddMovie}/>
         </Router>
       </div>

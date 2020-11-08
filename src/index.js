@@ -33,20 +33,16 @@ function* fetchMoviesList() {
     }
 }
 function* fetchMovieDetails(action) {
-    let movieId = action.payload.movieRecord.id
+    let movieId = action.payload.id;
     try {
         // movie details will contain the data that the details page will use to display things. 
-        const movieDetails = {
-            genres: yield Axios.get(`/api/movie/${movieId}`),
-            details: action.payload.movieRecord
-        }
+        const movieDetails = yield Axios.get(`/api/movie/${movieId}`);
         // add the movie details (full data) to redux state
-        yield put({
+        console.log(movieDetails.data);
+        yield put ({
             type: "SET_DETAILS",
-            payload: movieDetails
+            payload: movieDetails.data
         })
-        // if this all succeeded, push to the details page. 
-        router_PushToHistory('/details', action.payload.srcComp)
     } catch (error) {
         console.log(error);
     }
@@ -97,25 +93,21 @@ const genres = (state = [], action) => {
     }
 }
 
-const detailState = { // detail state represents the JSON structure of the movie details reducer.
-    details: {        // The detail page is looking for this data when it is called. 
+const detailState = {
+    // detail state represents the JSON structure of the movie details reducer.
+    // The detail page is looking for this data when it is called. 
+    movieDetails: [
+      {
         id: 0,
         title: 'Movie Title',
-        description: 'description',
-        poster: 'image path'
-        },
-    genres: {
-        data: [
-            {
-                id: 0,
-                movies_id: 0,
-                genres_id: 0,
-                name: 'genre name'
-            }
-        ]
-        }
-}
-
+        poster: 'poster path',
+        description: "movie description"
+      }
+    ],
+    movieGenres: [
+      { id: 0, movies_id: 0, genres_id: 0, name: 'genre name' },
+    ]
+  }
 const movieDetails = (state = detailState, action) => {
     switch (action.type) {
         case "SET_DETAILS":

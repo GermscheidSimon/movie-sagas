@@ -1,25 +1,16 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
+import {router_PushToHistory} from '../../library/navigation'
 import {connect} from 'react-redux'
 import './MovieItem.css'
 
 class MovieItem extends Component{
 
     handleItemCardSelect = () => {
-        this.prepareData()
+        router_PushToHistory(`/details/${this.props.movieRecord.id}`, this)
     }
-    prepareData = () => {
-
-        let movieInfoAndNav = {
-            movieRecord: this.props.movieRecord,
-            srcComp: this // want to pass up 'this' to index so that it can route on successful details load
-        }
-        console.log(this.props.movieRecord.id);
-        this.props.dispatch({
-            type: "FETCH_MOVIE_DETAILS",
-            payload: movieInfoAndNav
-        })
-    }
+    
+    
     render() {
 
         // creating readable alt tag

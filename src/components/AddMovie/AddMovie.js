@@ -70,7 +70,7 @@ class AddMovie extends Component{
                             />
                     </div>
                     <div className="formInputWrap"> 
-                        <label htmlFor="movieDescriptionInp">Movie Poster Link:  </label>
+                        <label htmlFor="movieDescriptionInp">Movie description:  </label>
                             <textarea 
                                 className="formInput movieDescriptionInp"
                                 required
