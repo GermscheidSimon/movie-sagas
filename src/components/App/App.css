@@ -17,6 +17,7 @@
 .App-intro {
   font-size: large;
 }
+/*  this CSS is used for all the buttons in this app */
 .defaultBtnCss{
   border: 0;
   margin-left: auto;
