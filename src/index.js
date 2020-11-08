@@ -53,8 +53,8 @@ function* fetchMovieDetails(action) {
 }
 function* fetchGenres() {
     try {
-        const genresList = yield Axios.get('/api/genre')
-        yield put({
+        const genresList = yield Axios.get('/api/genre') // get list of genres
+        yield put({          // add data from get request to genres reducer
             type: "SET_GENRES",
             payload: genresList.data
         })
@@ -65,9 +65,11 @@ function* fetchGenres() {
 
 function* postNewMovie(action) {
     try {
-        yield Axios.post('/api/movie', action.payload)
+        yield Axios.post('/api/movie', action.payload.data) // post new movie 
+        yield alert("Movie added to list! Returning to Home page")  // give the user some sort of confirmation the form was submitted 
+        yield router_PushToHistory('/', action.payload.nav) // upon successful post, return user to movie list
     } catch (error) {
-        console.log(error);
+        alert('Failed to add movie. Please try again. ') // let the user know if submission failed
     }
 }
 

@@ -19,13 +19,7 @@
 .detailTopOfPage{
     display: flex;
 }
-button{
-    border: 0;
-    margin-left: auto;
-    border-radius: 10px;
-    max-height: 30px;
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.2);
-}
+
 button:hover{
     box-shadow: 2px 1px 16px 0px rgba(0,0,0,0.2);
 }

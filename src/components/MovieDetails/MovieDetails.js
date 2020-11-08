@@ -50,7 +50,7 @@ class MovieDetails extends Component{
                             })}
                         </ul>
                     </div>
-                    <button onClick={this.handleClick}> Return To Movie List...</button>
+                    <button className="defaultBtnCss" onClick={this.handleClick}> Return To Movie List...</button>
                 </div>
                 <img className="moviePoster" src={movieDetails.details.poster} alt={movieDetails.details.title}/>
                 <p className="description">{movieDetails.details.description}</p>

@@ -3,5 +3,6 @@ const navigation = {
         console.log('routed to', Destination);
         srcComponent.props.history.push(Destination)
     }
+    
 }
 module.exports = navigation;

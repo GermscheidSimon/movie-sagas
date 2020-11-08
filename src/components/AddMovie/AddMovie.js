@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import './AddMovie.css'
+import {router_PushToHistory} from '../../library/navigation'
 
 class AddMovie extends Component{
 
@@ -31,10 +32,17 @@ class AddMovie extends Component{
         console.log(this.state.newMovie);
     }
     handleSubmit = () => {
+        let newMovieSubmission = {
+            data: this.state.newMovie,
+            nav: this
+        }
         this.props.dispatch({
             type: "POST_NEW_MOVIE",
-            payload: this.state.newMovie
+            payload: newMovieSubmission
         })
+    }
+    redirectToHome = () => {
+        router_PushToHistory('/', this)
     }
 
 
@@ -67,7 +75,7 @@ class AddMovie extends Component{
                                 className="formInput movieDescriptionInp"
                                 required
                                 onChange={(event) => this.handleChange('description', event)} 
-                                placeholder="an epic fantasy film . . . "
+                                placeholder="An epic fantasy film . . . "
                             />
                     </div>
                     <div className="formInputWrap">
@@ -77,13 +85,17 @@ class AddMovie extends Component{
                             required
                             onChange={(event) => this.handleChange('genre_id', event)}
                         >
-                            <option value="">Select a genre</option>
+                            <option value="">Select a genre</option> 
                             {this.props.reduxState.genres.map( genre => {
-                                 return <option value={genre.id}>{genre.name}</option>
+                                // return an option for each genre pulled from sql
+                                return <option value={genre.id}>{genre.name}</option>
                             })}
                         </select>
                     </div>
-                    <input className="formInput" type="submit" value="Add Movie"/>
+                    <div className="formInputWrap">
+                        <input className="formInput defaultBtnCss" type="submit" value="Add Movie"/>
+                        <button  className="defaultBtnCss cancel" onClick={this.redirectToHome}>Cancel</button>
+                    </div>
                 </form>
             </div>
         )
